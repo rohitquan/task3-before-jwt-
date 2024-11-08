@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.updatePassword(userDto);
     }
 
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
         } catch (AuthenticationException e) {
             return "Fail";
         }
-        return authentication.isAuthenticated() ? jwtService.generatedToken() : "Fail";
+        return authentication.isAuthenticated() ? jwtService.generateToken(userDto.getUsername()) : "Fail";
     }
 
 }

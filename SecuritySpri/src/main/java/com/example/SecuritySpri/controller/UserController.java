@@ -31,7 +31,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/updatePassword")
+    @PutMapping("/updatePassword")
     public void updatePassword(@RequestBody UserDto userDto){
         userService.changePassword(userDto);
     }
